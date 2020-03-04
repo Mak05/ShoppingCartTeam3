@@ -59,10 +59,10 @@ public class CustomerController {
 			String loggedInUserName = principal.getName();
 			System.out.println(loggedInUserName);
 			Object loggedUser = (Object) userService.findByRole(loggedInUserName);
-			if ((boolean) loggedUser.equals("M")) {
+			if ((boolean) loggedUser.equals("A")) {
 				// model.setViewName("ticketDetails");
 				res.sendRedirect("/addbook");
-			} else if ((boolean) loggedUser.equals("F")) {
+			} else if ((boolean) loggedUser.equals("U")) {
 				// model.setViewName("success");
 				res.sendRedirect("/home");
 			}
@@ -73,25 +73,7 @@ public class CustomerController {
 		}
 	}
 
-	/*@RequestMapping("/save")
-	public ModelAndView saveCustomer(@Valid @ModelAttribute("customer") Customer customer, BindingResult result) {
 
-		System.out.println("result.hasErrors()" + result.hasErrors());
-		if (result.hasErrors()) {
-			return new ModelAndView("add-customer");
-		}
-		customerService.saveCustomer(customer);
-		return new ModelAndView("redirect:show");
-	}
-
-	@RequestMapping("/show")
-	public ModelAndView showCustomer() {
-
-		List<Customer> customerlist = (List<Customer>) customerService.showCustomer();
-
-		return new ModelAndView("show-customer", "customerlist", customerlist);
-	}
-*/
 	@RequestMapping(value = "/home")
 	public ModelAndView homePage(Map<String, Object> map) {
 		map.put("bookList", bookService.listBooks());
